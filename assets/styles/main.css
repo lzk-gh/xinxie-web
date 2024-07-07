@@ -1,0 +1,29 @@
+:root {
+  --theme-main-bg-color: #f5f5f9;
+  --theme-header-bg-color: #ffffff;
+  --theme-border-color: #dbdbde;
+  --theme-text-color: #000000;
+}
+
+.dark {
+  --theme-main-bg-color: #1b1f25;
+  --theme-header-bg-color: #171a20;
+  --theme-border-color: #2c2f34;
+  --theme-text-color: #ffffff;
+
+  background-color: #171a20;
+}
+
+.body {
+  color: var(--theme-text-color);
+  background-color: var(--theme-main-bg-color);
+  transition: background-color 0.8s ease;
+}
+
+.obvious-text-color {
+  color: #e7a349;
+}
+
+.theme-border-b {
+  border-bottom: 1px solid var(--theme-border-color);
+}

@@ -2,7 +2,7 @@
   <div
     data-aos-offset="100"
     data-aos="fade-up"
-    class="fixed bottom-4 right-4 cursor-pointer"
+    class="fixed bottom-16 right-4 cursor-pointer"
     @click="scrollToTop"
   >
     <svg

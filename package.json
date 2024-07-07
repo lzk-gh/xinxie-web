@@ -10,8 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
     "@pinia/nuxt": "^0.5.1",
+    "naive-ui": "^2.38.2",
     "nuxt": "^3.12.2",
+    "nuxtjs-naive-ui": "^1.0.2",
     "pinia": "^2.1.7",
     "vue": "latest"
   },
@@ -22,6 +25,8 @@
     "nuxt-aos": "^1.2.4",
     "prettier": "^3.3.2",
     "typescript": "^5.5.3",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.2",
     "vue-tsc": "^1"
   }
 }

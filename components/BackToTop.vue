@@ -1,9 +1,9 @@
 <template>
   <div
-    data-aos-offset="100"
+    v-if="showScrollTop"
     data-aos="fade-up"
     class="fixed bottom-16 right-4 cursor-pointer"
-    @click="scrollToTop"
+    @click="handleScroll"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,15 +22,27 @@
   </div>
 </template>
 
-<script setup>
-import { nextTick } from 'vue';
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
 
-function scrollToTop() {
-  nextTick(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+const showScrollTop = ref(false);
+
+onMounted(() => {
+  window.addEventListener('scroll', listenerScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', listenerScroll);
+});
+
+function listenerScroll() {
+  showScrollTop.value = window.scrollY > 0;
+}
+
+function handleScroll() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
 }
 </script>

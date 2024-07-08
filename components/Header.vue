@@ -10,16 +10,13 @@
       <nav class="flex items-center hidden lg:block">
         <ul class="flex space-x-10">
           <li>
-            <NuxtLink to="/home">首页</NuxtLink>
+            <NuxtLink class="text-base" to="/home">首页</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/internal">内部专用</NuxtLink>
+            <NuxtLink class="text-base" to="/internal">内部专用</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/joinUs">加入我们</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/contact">联系我们</NuxtLink>
+            <NuxtLink class="text-base" to="/contact">联系我们</NuxtLink>
           </li>
         </ul>
       </nav>
@@ -29,7 +26,7 @@
           @click="handleThemeToggle"
         >
           <svg
-            v-if="!isThemeSun"
+            v-if="!isDark"
             class="w-5 h-5 transform transition-transform duration-300 hover:scale-110"
             viewBox="0 0 24 24"
             fill="none"
@@ -78,7 +75,7 @@
         </div>
         <div>
           <a
-            href="https://github.com/your-github-username"
+            href="https://github.com/lzk-gh/xinxie-web"
             target="_blank"
             class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-gray-200"
           >
@@ -163,15 +160,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { useTheme } from '../composables/useTheme';
 
 const triggerHeight = 1;
+
 const { switchDark } = useTheme();
+const globalStore = useGlobalStore();
 
 const isHeaderFixed = ref(false);
-const isThemeSun = ref(false);
 const isShowNav = ref(false);
+
+const isDark = computed(() => globalStore.isDark);
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
@@ -185,10 +185,8 @@ function handleScroll() {
   isHeaderFixed.value = window.scrollY > triggerHeight;
 }
 
-function handleThemeToggle(e: MouseEvent) {
-  console.log('handleThemeToggle', e);
+function handleThemeToggle() {
   switchDark();
-  isThemeSun.value = !isThemeSun.value;
 }
 
 function handleShowNavClick() {
@@ -201,12 +199,8 @@ function handleShowNavClick() {
 
 <style scoped>
 .header {
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*left: 0;*/
-  /*right: 0;*/
-  will-change: transform;
   z-index: 1000;
+  will-change: transform;
   background-color: var(--theme-header-bg-color);
   transition: background-color 0.8s ease;
 }

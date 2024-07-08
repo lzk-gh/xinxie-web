@@ -4,10 +4,11 @@ import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineNuxtConfig({
-  css: ['~/assets/styles/theme.css', 'aos/dist/aos.css'],
+  css: ['~/assets/styles/main.css'],
   modules: [
     'nuxtjs-naive-ui',
     '@nuxtjs/tailwindcss',
+    'nuxt-aos',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt'
   ],

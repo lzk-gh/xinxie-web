@@ -27,3 +27,11 @@
 .theme-border-b {
   border-bottom: 1px solid var(--theme-border-color);
 }
+
+/*文字不能选中*/
+.unselectable-text {
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}

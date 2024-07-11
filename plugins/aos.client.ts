@@ -1,8 +1,9 @@
 import AOS from 'aos';
 
 export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.vueApp.use(
+  nuxtApp.hook('app:mounted', () => {
     AOS.init({
+      // AOS 配置项
       disable: false, // 是否禁用 AOS (可接受值: 'phone', 'tablet', 'mobile', boolean, expression, function)
       startEvent: 'DOMContentLoaded', // AOS 初始化事件
       initClassName: 'aos-init', // 初始化后添加的类名
@@ -20,6 +21,6 @@ export default defineNuxtPlugin(nuxtApp => {
       once: false, // 动画是否只播放一次
       mirror: false, // 元素滚动出视窗时是否反向播放动画
       anchorPlacement: 'top-bottom' // 动画触发点位置
-    })
-  );
+    });
+  });
 });

@@ -12,13 +12,19 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt'
   ],
+  runtimeConfig: {
+    public: {
+      API_BASE_DEV: 'http://localhost:4000',
+      API_BASE_PROD: 'https://api.example.com/v1'
+    }
+  },
   devtools: { enabled: true },
   devServer: {
     port: 4000
   },
   vite: {
     ssr: {
-      noExternal: ['naive-ui', '@css-render/vue3-ssr', 'vueuc', 'date-fns']
+      noExternal: ['naive-ui', 'vueuc', 'date-fns']
     },
     plugins: [
       { src: '~/plugins/aos.client.ts', mode: 'client' },

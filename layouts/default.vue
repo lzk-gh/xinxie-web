@@ -8,7 +8,16 @@
   </div>
 </template>
 
-<script setup lang='ts'>
-</script>
+<style scoped>
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+}
 
-<style scoped></style>
+main {
+  flex: 1;
+}
+</style>

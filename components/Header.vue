@@ -10,13 +10,17 @@
       <nav class="flex items-center hidden lg:block">
         <ul class="flex space-x-10">
           <li>
-            <NuxtLink class="text-base" to="/home">首页</NuxtLink>
+            <NuxtLink class="text-base nav-link" to="/home">首页</NuxtLink>
           </li>
           <li>
-            <NuxtLink class="text-base" to="/internal">内部专用</NuxtLink>
+            <NuxtLink class="text-base nav-link" to="/internal">
+              内部专用
+            </NuxtLink>
           </li>
           <li>
-            <NuxtLink class="text-base" to="/contact">联系我们</NuxtLink>
+            <NuxtLink class="text-base nav-link" to="/contact">
+              联系我们
+            </NuxtLink>
           </li>
         </ul>
       </nav>
@@ -73,6 +77,14 @@
             />
           </svg>
         </div>
+
+        <NuxtLink
+          class="nav-link text-base text-slate-600 w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center cursor-pointer"
+          to="/ai"
+        >
+          AI
+        </NuxtLink>
+
         <div>
           <a
             href="https://github.com/lzk-gh/xinxie-web"
@@ -107,69 +119,74 @@
           </svg>
         </button>
       </div>
-      <teleport to="body">
-        <div
-          class="header-nav-dialog absolute left-0 w-full h-full dark:bg-gray-700 z-50 transition-all duration-300 ease-in-out transform"
-          :class="{
-            'translate-x-0': isShowNav,
-            '-translate-x-full': !isShowNav
-          }"
-        >
-          <nav class="h-full px-4 py-8">
-            <ul
-              class="flex flex-col h-full items-center justify-center space-y-8"
-            >
-              <li>
-                <NuxtLink
-                  to="/home"
-                  class="text-xl font-medium hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  首页
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  to="/internal"
-                  class="text-xl font-medium hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  内部专用
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  to="/joinUs"
-                  class="text-xl font-medium hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  加入我们
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  to="/contact"
-                  class="text-xl font-medium hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  联系我们
-                </NuxtLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </teleport>
+      <NDrawer
+        v-model:show="globalStore.isCollapse"
+        height="93%"
+        placement="bottom"
+      >
+        <NDrawerContent>
+          <div
+            class="header-nav-dialog absolute top-0 left-0 w-full h-full dark:bg-gray-700 z-50 transition-all duration-300 ease-in-out transform"
+            :class="{
+              'translate-x-0': globalStore.isCollapse,
+              '-translate-x-full': !globalStore.isCollapse
+            }"
+          >
+            <nav class="h-full">
+              <ul
+                class="flex flex-col h-full items-center justify-center space-y-8"
+              >
+                <li>
+                  <NuxtLink
+                    to="/home"
+                    class="text-xl nav-link font-medium hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    首页
+                  </NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink
+                    to="/internal"
+                    class="text-xl nav-link font-medium hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    内部专用
+                  </NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink
+                    to="/contact"
+                    class="text-xl nav-link font-medium hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    联系我们
+                  </NuxtLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </NDrawerContent>
+      </NDrawer>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 import { useTheme } from '../composables/useTheme';
 
 const triggerHeight = 1;
 
 const { switchDark } = useTheme();
 const globalStore = useGlobalStore();
+const router = useRouter();
 
 const isHeaderFixed = ref(false);
-const isShowNav = ref(false);
+
+watch(
+  () => router.currentRoute.value,
+  () => {
+    globalStore.isCollapse = false;
+  }
+);
 
 const isDark = computed(() => globalStore.isDark);
 
@@ -190,10 +207,7 @@ function handleThemeToggle() {
 }
 
 function handleShowNavClick() {
-  isShowNav.value = !isShowNav.value;
-
-  // 切换页面滚动锁定
-  document.body.style.overflow = isShowNav.value ? 'hidden' : 'auto';
+  globalStore.isCollapse = !globalStore.isCollapse;
 }
 </script>
 
@@ -223,5 +237,9 @@ function handleShowNavClick() {
 .header-nav-dialog {
   color: var(--theme-text-color);
   background-color: var(--theme-main-bg-color);
+}
+
+.nav-link.router-link-active {
+  color: #e7a349;
 }
 </style>

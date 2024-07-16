@@ -18,9 +18,12 @@ export default defineNuxtConfig({
       API_BASE_PROD: 'https://api.example.com/v1'
     }
   },
+  tailwindcss: {
+    configPath: './tailwind.config.ts',
+  },
   devtools: { enabled: true },
   devServer: {
-    port: 4000
+    port: 3000
   },
   vite: {
     ssr: {

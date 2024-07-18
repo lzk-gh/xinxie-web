@@ -1,9 +1,14 @@
 <template>
-  <HomeCover />
-  <HomeIntro />
-  <HomeCadre />
-  <HomeJoinUs />
-  <BackToTop />
+  <div class="min-h-screen">
+    <ClientOnly>
+      <HomeCover />
+      <HomeIntro />
+      <HomeCadre />
+      <NMessageProvider>
+        <HomeJoinUs />
+      </NMessageProvider>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

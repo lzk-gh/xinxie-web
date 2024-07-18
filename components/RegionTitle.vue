@@ -21,6 +21,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  align: 'text-center' | 'text-left' | 'text-right';
+  align?: 'text-center' | 'text-left' | 'text-right';
 }>();
 </script>

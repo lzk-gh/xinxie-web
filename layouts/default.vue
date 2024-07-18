@@ -1,23 +1,10 @@
 <template>
-  <div class="body">
+  <div class="body flex flex-col min-h-screen overflow-hidden">
     <Header />
-    <main>
-      <slot></slot>
+    <main class="flex flex-1">
+      <slot />
     </main>
     <Footer />
+    <BackToTop />
   </div>
 </template>
-
-<style scoped>
-.body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 100vw;
-  overflow: hidden;
-}
-
-main {
-  flex: 1;
-}
-</style>
